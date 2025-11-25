@@ -12,7 +12,7 @@ export function ButtonShowDomain() {
   )
 }
 
-export function ButtonAddDomain() {
+export function ButtonAddDomain({ onAdded }: { onAdded: () => void }) {
   const [openForm, setOpenForm] = useState(false);
   const router = useRouter();
 
@@ -30,7 +30,8 @@ export function ButtonAddDomain() {
         body: JSON.stringify({ url, image }),
       });
 
-      router.refresh();
+      onAdded();
+      // router.refresh();
 
     } catch (error) {
       console.error('Error adding domain:', error);

@@ -11,12 +11,6 @@
 
 // "use client";
 
-import Link from "next/link";
-import Domains from "./components/Domains";
-import { Suspense } from "react";
-import Button from './components/button';
-import { Sidebar } from './components/Sidebar';
-
 export default function Home() {
   return (
     <main className="flex-1 p-4">
