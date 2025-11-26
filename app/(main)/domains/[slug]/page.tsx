@@ -1,5 +1,8 @@
+import Breadcrumbs from "@/app/components/client/Breadcrumbs";
+import { SingleDomain } from "@/app/components/server/Domains";
 import Link from "next/link";
-import { LuBotMessageSquare, LuCopy, LuLink, LuLink2, LuPackage, LuSettings, LuTarget } from "react-icons/lu";
+import { LuBotMessageSquare, LuCopy, LuLink2, LuPackage, LuSettings, LuTarget } from "react-icons/lu";
+import { Domains } from '@/utils/type';
 
 interface Props {
   params: Promise<{ slug: string }>;
@@ -7,18 +10,20 @@ interface Props {
 
 export default async function page({ params }: Props) {
   const { slug } = await params;
+  const url = await SingleDomain({ slug } as Domains);
   return (
     <div>
-      <header className="">
+      <Breadcrumbs url={url} />
+      {/* <header className="">
         <nav className="px-6 py-4">
           <ul className="flex items-center gap-2">
-            <li><Link href={"/"} className="text-sm font-medium flex items-center gap-1.5 px-2 py-1.5 bg-neutral-100 rounded-lg"><LuTarget className="size-5 text-neutral-400" />{"Overview"}</Link></li>
+            <li><Link href={"/"} className="text-sm font-medium flex items-center gap-1.5 px-2 py-1.5 bg-white rounded-full"><LuTarget className="size-5 text-neutral-400" />{"Overview"}</Link></li>
             <li><Link href={"/"} className="text-sm font-medium flex items-center gap-1.5 px-2 py-1.5 rounded-lg" ><LuBotMessageSquare className="size-5 text-neutral-400" />{"Bot Training"}</Link></li>
             <li><Link href={"/"} className="text-sm font-medium flex items-center gap-1.5 px-2 py-1.5 rounded-lg" ><LuPackage className="size-5 text-neutral-400" />{"Products"}</Link></li>
             <li><Link href={"/"} className="text-sm font-medium flex items-center gap-1.5 px-2 py-1.5 rounded-lg" ><LuSettings className="size-5 text-neutral-400" />{"Settings"}</Link></li>
           </ul>
         </nav>
-      </header>
+      </header> */}
       <div className="px-6 py-4">
         <h1>Manage domain</h1>
         <div className="flex items-center gap-2">

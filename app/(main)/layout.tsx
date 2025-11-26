@@ -9,7 +9,7 @@ export default function DashboardLayout({
   return (
     <main className="flex items-start">
       <Sidebar />
-      <div className="w-full">
+      <div className="w-full min-h-dvh">
         {children}
       </div>
     </main>

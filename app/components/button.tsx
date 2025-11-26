@@ -4,6 +4,9 @@ import React, { useState } from 'react'
 import { useRouter } from "next/navigation";
 import { LuChevronRight, LuPlus } from 'react-icons/lu';
 
+export const Btn = () => {
+  return <button onClick={()=>alert('HEHE')}>CLICK</button>
+}
 export function ButtonShowDomain() {
   return (
     <button className="bg-transparent hover:bg-neutral-200 rounded-sm p-0.5 absolute left-2 cursor-pointer z-10 opacity-0 group-hover:opacity-100">
