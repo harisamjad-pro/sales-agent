@@ -5,6 +5,11 @@ export const SingleDomain = async ({ slug }: Domains) =>
     .then(res => res.json()))
     .url;
 
-export const AllDomains = async (): Promise<Domains[]> =>
-  await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/domains`, { cache: 'no-store' })
+// export const AllDomains = async (): Promise<Domains[]> =>
+//   await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/domains`, { cache: 'no-store' })
+//     .then(res => res.json());
+
+
+export const AllDomains = async (search: string = ""): Promise<Domains[]> =>
+  await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/domains?search=${search}`, { cache: "no-store" })
     .then(res => res.json());

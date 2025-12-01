@@ -1,4 +1,5 @@
 // import Image from "next/image";
+import Link from 'next/link';
 // <Image
 //   className="dark:invert"
 //   src="/next.svg"
@@ -16,6 +17,8 @@ export default function Home() {
     <main className="flex-1 p-4">
       <h1 className="text-2xl font-bold mb-4">Welcome to Sales Agent Dashboard</h1>
       <p>Select an option from the sidebar to get started.</p>
+      <br />
+      <Link href={"/login"}>Login</Link>
     </main>
   );
 }

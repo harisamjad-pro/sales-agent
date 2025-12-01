@@ -45,7 +45,7 @@ function SidebarNavButtonComponent({ title, onClick, icon }: SidebarNavButtonPro
 export function Sidebar() {
   const pathname = usePathname();
   return (
-    <aside className="w-80 border-r border-stone-200 bg-stone-50 min-h-dvh">
+    <aside className="w-72 border-r border-stone-200 bg-stone-50 min-h-dvh">
       <nav className="px-2 py-2">
         <ul>
           {/* {pathname} */}

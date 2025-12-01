@@ -3,18 +3,64 @@ import { slugify } from '@/lib/slugify';
 import { createClient } from '@/lib/supabase/server';
 import { NextRequest, NextResponse } from 'next/server';
 
-export async function GET() {
+// export async function GET(request: NextRequest) {
+//   const supabase = await createClient();
+
+//   const search = request.nextUrl.searchParams.get("search") || "";
+
+//   let query = supabase
+//     .from("domains")
+//     .select("*")
+//     .order("id", { ascending: true });
+
+//   if (search.trim() !== "") {
+//     query = query.ilike("url", `%${search}%`);
+//   }
+
+//   const { data, error } = await query;
+
+//   if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+
+//   return NextResponse.json(data);
+// }
+
+export async function GET(request: NextRequest) {
   const supabase = await createClient();
 
-  const { data, error } = await supabase
+  const search = request.nextUrl.searchParams.get("search") || "";
+  const page = Number(request.nextUrl.searchParams.get("page") || "1");
+  const limit = Number(request.nextUrl.searchParams.get("limit") || "10");
+
+  const from = (page - 1) * limit;
+  const to = from + limit - 1;
+
+  let query = supabase
     .from("domains")
-    .select("*")
-    .order('id', { ascending: true });
+    .select("*", { count: "exact" })
+    .order("id", { ascending: true })
+    .range(from, to);
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (search.trim() !== "") {
+    query = query.ilike("url", `%${search}%`);
+  }
 
-  return NextResponse.json(data);
+  const { data, error, count } = await query;
+
+  if (error) {
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
+
+  return NextResponse.json({
+    data,
+    pagination: {
+      page,
+      limit,
+      total: count || 0,
+      totalPages: count ? Math.ceil(count / limit) : 1,
+    },
+  });
 }
+
 
 
 export async function POST(request: NextRequest) {
