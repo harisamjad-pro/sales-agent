@@ -16,5 +16,5 @@ export async function loginAction(formData: FormData) {
 
   if (error) return { error: error.message };
 
-  redirect("/dashboard");
+  redirect("/domains");
 }
