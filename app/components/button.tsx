@@ -2,10 +2,11 @@
 
 import React, { useState } from 'react'
 import { useRouter } from "next/navigation";
-import { LuChevronRight, LuPlus } from 'react-icons/lu';
+import { LuChevronRight, LuLoader, LuPlus } from 'react-icons/lu';
+import { logoutAction } from '@/app/(auth)/logout/actions';
 
 export const Btn = () => {
-  return <button onClick={()=>alert('HEHE')}>CLICK</button>
+  return <button onClick={() => alert('HEHE')}>CLICK</button>
 }
 export function ButtonShowDomain() {
   return (
@@ -78,4 +79,17 @@ export function ButtonAddDomain({ onAdded }: { onAdded: () => void }) {
       )}
     </>
   );
+}
+
+
+export function ButtonLogout() {
+  const [loader, setLoader] = useState(false);
+  const logout = async () => {
+    setLoader(true);
+    await logoutAction();
+  }
+  return <button onClick={logout} className={`bg-red-500 p-2 cursor-pointer flex items-center gap-1.5 ${loader && "opacity-50"}`} disabled={loader}>
+    {loader && <LuLoader className="size-5 animate-spin" />}
+    Logout
+  </button>
 }

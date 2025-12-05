@@ -1,15 +1,14 @@
 
 import Breadcrumbs from '@/app/components/client/Breadcrumbs';
-import { AllDomains } from '@/app/components/server/Domains';
 import Link from 'next/link'
 import React, { Suspense } from 'react';
-import { LuCircle, LuDot, LuGlobe, LuPenLine } from 'react-icons/lu'
+import { LuCircle, LuGlobe, LuPenLine, LuPlus } from 'react-icons/lu'
 import { createdAt } from '@/utils/createdAt';
 import { Domains } from '@/utils/type';
 import Image from 'next/image';
 import SearchBar from '@/app/components/SearchBar';
-import { createClient } from '@/lib/supabase/server';
 import { cookies } from 'next/headers';
+import { AllDomains } from '@/utils/api/domains';
 
 export default async function Page({
   searchParams
@@ -27,6 +26,7 @@ export default async function Page({
           <p className="text-stone-500 font-normal text-sm">Manage settings, training data, and products for your domain.</p>
         </div>
         <SearchBar placeholder="Search domains..." />
+        <button className="flex items-center gap-0.5 px-2 pe-2.5 py-1.5 bg-blue-500 hover:bg-blue-600 rounded-lg text-sm font-medium text-white"><LuPlus />New</button>
         <Suspense fallback={<div>Loading domains...</div>}>
           <D query={search} />
         </Suspense>
@@ -70,7 +70,9 @@ export const List = ({ data }: { data: Domains[] }) => {
           </Link>
         )) : (
           <div>
-            <p>No data</p>
+            <p className="font-semibold text-sm text-stone-500">No results found</p>
+            <p className="text-sm text-stone-500 font-normal">Some results may be in your trash.</p>
+            <Link className="text-blue-500" href={"/trash"}>See trash</Link>
           </div>
         )}
     </div>

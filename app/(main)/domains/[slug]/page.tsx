@@ -1,8 +1,8 @@
 import Breadcrumbs from "@/app/components/client/Breadcrumbs";
-import { SingleDomain } from "@/app/components/server/Domains";
 import Link from "next/link";
 import { LuBotMessageSquare, LuCopy, LuLink2, LuPackage, LuSettings, LuTarget } from "react-icons/lu";
 import { Domains } from '@/utils/type';
+import { SingleDomain } from "@/utils/api/domains";
 
 interface Props {
   params: Promise<{ slug: string }>;
